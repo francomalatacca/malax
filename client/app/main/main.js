@@ -7,5 +7,9 @@ angular.module('malaxApp')
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      }).when('/post/:id', {
+        templateUrl: 'app/post/post.html',
+        controller: 'PostController',
+        controllerAs: 'post'
       });
   });

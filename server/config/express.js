@@ -50,9 +50,9 @@ module.exports = function(app) {
    * https://github.com/krakenjs/lusca
    */
   if ('test' !== env) {
-    app.use(lusca({
+    /*app.use(lusca({
       csrf: {
-        angular: true
+        angular: false
       },
       xframe: 'SAMEORIGIN',
       hsts: {
@@ -60,8 +60,9 @@ module.exports = function(app) {
         includeSubDomains: true,
         preload: true
       },
-      xssProtection: true
-    }));
+      xssProtection: false
+    }));*/
+
   }
 
   app.set('appPath', path.join(config.root, 'client'));

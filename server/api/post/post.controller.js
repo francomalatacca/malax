@@ -1,16 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/things              ->  index
- * POST    /api/things              ->  create
- * GET     /api/things/:id          ->  show
- * PUT     /api/things/:id          ->  update
- * DELETE  /api/things/:id          ->  destroy
+ * GET     /api/posts              ->  index
+ * POST    /api/posts              ->  create
+ * GET     /api/posts/:id          ->  show
+ * PUT     /api/posts/:id          ->  update
+ * DELETE  /api/posts/:id          ->  destroy
  */
 
 'use strict';
 
 var _ = require('lodash');
-var Thing = require('./thing.model');
+var Post = require('./post.model.js');
 
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
@@ -38,6 +38,12 @@ function handleEntityNotFound(res) {
   };
 }
 
+function appendLinksWithResult(res) {
+	return function(entity) {
+
+	}
+}
+
 function saveUpdates(updates) {
   return function(entity) {
     var updated = _.merge(entity, updates);
@@ -61,41 +67,42 @@ function removeEntity(res) {
 
 // Gets a list of Things
 exports.index = function(req, res) {
-  Thing.findAsync()
+  Post.findAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Gets a single Thing from the DB
+// Gets a single Post from the DB
 exports.show = function(req, res) {
-  Thing.findByIdAsync(req.params.id)
-    .then(handleEntityNotFound(res))
-    .then(responseWithResult(res))
-    .catch(handleError(res));
+  Post.findByIdAsync(req.params.id)
+      .then(handleEntityNotFound(res))
+      .then(responseWithResult(res))
+      .then(appendLinksWithResult(req, res))
+      .catch(handleError(res));
 };
 
-// Creates a new Thing in the DB
+// Creates a new Post in the DB
 exports.create = function(req, res) {
-  Thing.createAsync(req.body)
+  Post.createAsync(req.body)
     .then(responseWithResult(res, 201))
     .catch(handleError(res));
 };
 
-// Updates an existing Thing in the DB
+// Updates an existing Post in the DB
 exports.update = function(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Thing.findByIdAsync(req.params.id)
+  Post.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(responseWithResult(res))
     .catch(handleError(res));
 };
 
-// Deletes a Thing from the DB
+// Deletes a Post from the DB
 exports.destroy = function(req, res) {
-  Thing.findByIdAsync(req.params.id)
+  Post.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

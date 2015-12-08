@@ -2,30 +2,36 @@
 
 (function() {
 
-class MainController {
+	class MainController {
 
-  constructor($http) {
-    this.$http = $http;
-    this.awesomeThings = [];
+		constructor($http) {
+			this.$http = $http;
+			this.Posts = [];
 
-    $http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-    });
-  }
+			$http.get('/api/posts').then(response => {
+				this.Posts = response.data;
+			});
+		}
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
-    }
-  }
+		getPost(id) {
+			$http.get('/api/posts/' + id).then(response => {
+				this.Posts = response.data;
+			});
+		}
 
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
-  }
-}
+		addPost() {
+			if (this.newPost) {
+				this.$http.post('/api/posts', { name: this.newPost });
+				this.newPost = '';
+			}
+		}
 
-angular.module('malaxApp')
-  .controller('MainController', MainController);
+		deletePost(post) {
+			this.$http.delete('/api/posts/' + post._id);
+		}
+	}
+
+	angular.module('malaxApp')
+		.controller('MainController', MainController);
 
 })();

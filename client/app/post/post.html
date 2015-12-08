@@ -13,19 +13,19 @@
   <div class="row">
     <div class="col-md-8 col-lg-8 col-sm-12 col-md-offset-2 col-lg-offset-2">
 
-      <article class="nav nav-tabs nav-stacked" ng-repeat="post in main.Posts">
+      <article class="nav nav-tabs nav-stacked">
 
           <h1 class="article-header">
-              <i class="fa fa-file-text-o"></i> <a href="/post/{{post._id}}">{{post.title}}</a>
+              <i class="fa fa-file-text-o"></i> <a href="/post/{{post._id}}">{{post.Post.title}}</a>
           </h1>
           <span class="article-info">
-            <i class="fa fa-user"></i> {{post.author}} <i class="fa fa-calendar"></i> {{post.created | date:'MM/dd/yyyy @ h:mma'}}
+            <a href="/">go back<i class="fa fa-long-arrow-left"></i></a> <i class="fa fa-user"></i> {{post.Post.author}} <i class="fa fa-calendar"></i> {{post.Post.created | date:'MM/dd/yyyy @ h:mma'}}
           </span>
           <p>
-            {{post.body | limitTo:99}}...
+            {{post.Post.body}}
           </p>
           <span class="article-info">
-            #<a ng-repeat="meta in post.meta" class="meta">{{meta}}</a>
+            #<a ng-repeat="meta in post.Post.meta" class="meta">{{meta}}</a>
           </span>
         </article>
     </div>

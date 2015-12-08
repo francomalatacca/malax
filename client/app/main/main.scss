@@ -25,3 +25,36 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+body {
+  font-family: 'Inconsolata', Courier;
+}
+
+.article-header {
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+}
+
+.article-header a {
+  text-decoration: none;
+}
+
+.article-info {
+  clear: both;
+}
+
+a.meta {
+  font-size: 0.9em;
+  color: darkgray;
+  font-style: italic;
+  text-decoration: none;
+}
+
+a.meta:hover {
+  border-bottom: 1px dashed darkgray;
+  cursor: pointer;
+}
+
+.clear-both {
+  clear: both;
+}

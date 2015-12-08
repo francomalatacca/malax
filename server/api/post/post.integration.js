@@ -5,7 +5,7 @@ var request = require('supertest');
 
 var newThing;
 
-describe('Thing API:', function() {
+describe('Post API:', function() {
 
   describe('GET /api/things', function() {
     var things;
@@ -35,8 +35,8 @@ describe('Thing API:', function() {
       request(app)
         .post('/api/things')
         .send({
-          name: 'New Thing',
-          info: 'This is the brand new thing!!!'
+          name: 'New Post',
+          info: 'This is the brand new post!!!'
         })
         .expect(201)
         .expect('Content-Type', /json/)
@@ -49,9 +49,9 @@ describe('Thing API:', function() {
         });
     });
 
-    it('should respond with the newly created thing', function() {
-      newThing.name.should.equal('New Thing');
-      newThing.info.should.equal('This is the brand new thing!!!');
+    it('should respond with the newly created post', function() {
+      newThing.name.should.equal('New Post');
+      newThing.info.should.equal('This is the brand new post!!!');
     });
 
   });
@@ -77,9 +77,9 @@ describe('Thing API:', function() {
       thing = {};
     });
 
-    it('should respond with the requested thing', function() {
-      thing.name.should.equal('New Thing');
-      thing.info.should.equal('This is the brand new thing!!!');
+    it('should respond with the requested post', function() {
+      thing.name.should.equal('New Post');
+      thing.info.should.equal('This is the brand new post!!!');
     });
 
   });
@@ -91,8 +91,8 @@ describe('Thing API:', function() {
       request(app)
         .put('/api/things/' + newThing._id)
         .send({
-          name: 'Updated Thing',
-          info: 'This is the updated thing!!!'
+          name: 'Updated Post',
+          info: 'This is the updated post!!!'
         })
         .expect(200)
         .expect('Content-Type', /json/)
@@ -109,9 +109,9 @@ describe('Thing API:', function() {
       updatedThing = {};
     });
 
-    it('should respond with the updated thing', function() {
-      updatedThing.name.should.equal('Updated Thing');
-      updatedThing.info.should.equal('This is the updated thing!!!');
+    it('should respond with the updated post', function() {
+      updatedThing.name.should.equal('Updated Post');
+      updatedThing.info.should.equal('This is the updated post!!!');
     });
 
   });
@@ -130,7 +130,7 @@ describe('Thing API:', function() {
         });
     });
 
-    it('should respond with 404 when thing does not exist', function(done) {
+    it('should respond with 404 when post does not exist', function(done) {
       request(app)
         .delete('/api/things/' + newThing._id)
         .expect(404)

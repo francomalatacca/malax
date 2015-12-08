@@ -5,7 +5,7 @@
 'use strict';
 
 var EventEmitter = require('events').EventEmitter;
-var Thing = require('./thing.model');
+var Thing = require('./post.model.js');
 var ThingEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
